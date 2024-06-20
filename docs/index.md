@@ -1,3 +1,3 @@
 ## pages
-- [hello world](docs/file2.md)
-- [manifest](docs/manifest.md)
+- [hello world](file2.md)
+- [manifest](manifest.md)
