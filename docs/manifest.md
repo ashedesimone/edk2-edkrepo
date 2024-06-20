@@ -5,7 +5,32 @@ The `ManifestXml` class represents a manifest file parser used for parsing and m
 
 The manifest `ManifestXml` class does not validate the contents of manifest files for correctness beyond adherence with the project manifest file schema.
 
-Per Pep8 methods and attributes beginning with `_` or `__` should be considered private and not directly invoked by consumers of this module. 
+Per Pep8 methods and attributes beginning with `_` or `__` should be considered private and not directly invoked by consumers of this module.
+
+### Class Diagram
+```mermaid
+classDiagram
+    Animal <|-- Duck
+    Animal <|-- Fish
+    Animal <|-- Zebra
+    Animal : +int age
+    Animal : +String gender
+    Animal: +isMammal()
+    Animal: +mate()
+    class Duck{
+      +String beakColor
+      +swim()
+      +quack()
+    }
+    class Fish{
+      -int sizeInFeet
+      -canEat()
+    }
+    class Zebra{
+      +bool is_wild
+      +run()
+    }
+```
 
 ### Attributes
 - `_project_info`: Stores the contents of the *ProjectInfo* subroot.
