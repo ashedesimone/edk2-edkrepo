@@ -6,10 +6,11 @@ The `ManifestXml` class represents a manifest file parser used for parsing and m
 
 The manifest `ManifestXml` class does not validate the contents of manifest files for correctness beyond adherence with the project manifest file schema.
 
-Per Pep8 methods and attributes beginning with `_` or `__` should be considered private and not directly invoked by consumers of this module. 
+Per Pep8 methods and attributes beginning with `_` or `__` should be considered private and not directly invoked by consumers of this class. 
 
 ### Attributes
-- `_project_info`: Stores the contents of the *ProjectInfo* subroot.
+
+- __`_project_info`__: Stores the contents of the *ProjectInfo* subroot.
 - `_general_config`: Stores the contents of the *GeneralConfig* subroot.
 - `_remotes`: Stores the contents of the *RemoteList* subroot as a dictionary with the remote name as the key. Each unique *Remote* subtree is a separate entry.
 - `_client_hook_list`: Stores the contents of the *ClientGitHookList* subroot.
@@ -30,13 +31,13 @@ Per Pep8 methods and attributes beginning with `_` or `__` should be considered 
 - `is_pin_file(self)`: Determines if a *Pin* or *Manifest* file is represented. Returns a boolean.
 - `add_combo(self, element)`: Utility method which adds a new *Combination* to the manifest file.
 - `_add_combo_source(self, subroot, combo)`: Parses the given *subroot* generating an appending *RepoSource* objects to `_combinations` for the given *combo*. 
-  
-  *Note: combo must match the name of an existing Combination listed in `_combinations`*
+> [!Note]
+> combo must match the name of an existing Combination listed in `_combinations`
 - `_add_unique_item(self, obj, item_dict, tag)`: Adds a key/value pair to the dictionary if and only if the key is not already present. Raises *KeyError* if a duplicate key is used.
 - `_tuple_list(self, obj_list)`: Utility function which iterates through a list of parser objects returning a a list of *object.tuple()*
 - `write_current_combo(self, combo_name, filename=None)`: Updates the *CurrentClonedCombo* tag and writes the entire tree to the file specified; if no file is specified then the one used to instantiate the *ManifestXml* object will be used. This method is not supported if the *ManifestXml* object refers to a *pin file*.
-  
-  *Note: this method will strip comments from the source file*
+> [!NOTE]
+> This method will strip comments from the source file
 - `write_source_manifest_repo(self, manifest_repo, filename=None)`: Updates or adds the *SourceManifestRepository* and writes then entire tree to the file specified, if no file is specified then the one used to instantiate the *ManifestXml* object will be used. 
 > [!NOTE]
 > This method will strip comments from the source file
@@ -59,3 +60,5 @@ Per Pep8 methods and attributes beginning with `_` or `__` should be considered 
 - `get_combo_element(self, name)`: Finds the the combo element which matches *name* and returns a copy. Raises *ValueError* if no matching combo is found. 
 ### Properties
 - `get_all_patchsets(self)`: Returns a list of all patch sets.
+### XML File Syntax
+Manifest files are intended a to be formatted and edited in XML; JSON translation methods are available if required by toolsets other than EdkRepo see 
