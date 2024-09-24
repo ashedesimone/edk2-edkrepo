@@ -39,8 +39,8 @@ Per Pep8 methods and attributes beginning with `_` or `__` should be considered 
   *Note: this method will strip comments from the source file*
 - `write_source_manifest_repo(self, manifest_repo, filename=None)`: Updates or adds the *SourceManifestRepository* and writes then entire tree to the file specified, if no file is specified then the one used to instantiate the *ManifestXml* object will be used. 
 
-  >[!NOTE]
-  >This method will strip comments from the source file
+  > [!NOTE]
+  > This method will strip comments from the source file
 - `write_tree(self, filename=None)`: Writes the tree representing the entire *ManifestXml* object to the provided file.
 - `generate_pin_xml(self, description, combo_name, repo_source_list, filename=None)`: Generates and writes an XML formatted *Pin* file containing only the provided `combo_name` and `repo_source_list` using the *ManifestXml* object.
 - `generate_pin_json(self, description, combo_name, repo_source_list, filename=None)`: Generates and writes a JSON formatted *Pin* file containing only the provided `combo_name` and `repo_source_list` using the *ManifestXml* object.
