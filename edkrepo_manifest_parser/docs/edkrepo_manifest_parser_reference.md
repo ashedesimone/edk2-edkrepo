@@ -27,6 +27,8 @@ Per Pep8 methods and attributes beginning with `_` or `__` should be considered 
 - `_patch_set_operations`: Stores all operations required to process a given patch set as a dictionary where the key is a tuple of the format *(name, remote)* and each entry is a list of *PatchSetOperations* objects.
 
 ### Methods
+ [!NOTE]
+> The `write_current_combo` and ``write_source_manifest_repo` methods will strip comments from the source file
 - `__init__(self, fileref)`: Initializes the `ManifestXml` object with a file reference, verifies that custom syntax requirements (e.g. required fields) are met, appends included file references, and populates the class attributes. 
 - `is_pin_file(self)`: Determines if a *Pin* or *Manifest* file is represented. Returns a boolean.
 - `add_combo(self, element)`: Utility method which adds a new *Combination* to the manifest file.
@@ -36,11 +38,7 @@ Per Pep8 methods and attributes beginning with `_` or `__` should be considered 
 - `_add_unique_item(self, obj, item_dict, tag)`: Adds a key/value pair to the dictionary if and only if the key is not already present. Raises *KeyError* if a duplicate key is used.
 - `_tuple_list(self, obj_list)`: Utility function which iterates through a list of parser objects returning a a list of *object.tuple()*
 - `write_current_combo(self, combo_name, filename=None)`: Updates the *CurrentClonedCombo* tag and writes the entire tree to the file specified; if no file is specified then the one used to instantiate the *ManifestXml* object will be used. This method is not supported if the *ManifestXml* object refers to a *pin file*.
-> [!NOTE]
-> This method will strip comments from the source file
 - `write_source_manifest_repo(self, manifest_repo, filename=None)`: Updates or adds the *SourceManifestRepository* and writes then entire tree to the file specified, if no file is specified then the one used to instantiate the *ManifestXml* object will be used. 
-> [!NOTE]
-> This method will strip comments from the source file
 - `write_tree(self, filename=None)`: Writes the tree representing the entire *ManifestXml* object to the provided file.
 - `generate_pin_xml(self, description, combo_name, repo_source_list, filename=None)`: Generates and writes an XML formatted *Pin* file containing only the provided `combo_name` and `repo_source_list` using the *ManifestXml* object.
 - `generate_pin_json(self, description, combo_name, repo_source_list, filename=None)`: Generates and writes a JSON formatted *Pin* file containing only the provided `combo_name` and `repo_source_list` using the *ManifestXml* object.
