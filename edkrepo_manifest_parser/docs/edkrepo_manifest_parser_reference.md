@@ -27,14 +27,15 @@ Per Pep8 methods and attributes beginning with `_` or `__` should be considered 
 - `_patch_set_operations`: Stores all operations required to process a given patch set as a dictionary where the key is a tuple of the format *(name, remote)* and each entry is a list of *PatchSetOperations* objects.
 
 ### Methods
- [!NOTE]
-> The `write_current_combo` and ``write_source_manifest_repo` methods will strip comments from the source file
-- `__init__(self, fileref)`: Initializes the `ManifestXml` object with a file reference, verifies that custom syntax requirements (e.g. required fields) are met, appends included file references, and populates the class attributes. 
+#### Internal
+- `__init__(self, fileref)`: Initializes the `ManifestXml` object with a file reference, verifies that custom syntax requirements (e.g. required fields) are met, appends included file references, and populates the class attributes.
+-  `__eq__(self, other)`: 
+- `__ne__(self, other)`:
+-  `_compare_elements(self, element1, element2)`: Recursively compares *element1* and *element2* returning a boolean.
+-  `_dfs_traverse_etree(self, node)`: Traverses the element tree returning a dictionary representation that can be used to create XML or JSON formatted *Pin* file.
 - `is_pin_file(self)`: Determines if a *Pin* or *Manifest* file is represented. Returns a boolean.
 - `add_combo(self, element)`: Utility method which adds a new *Combination* to the manifest file.
 - `_add_combo_source(self, subroot, combo)`: Parses the given *subroot* generating an appending *RepoSource* objects to `_combinations` for the given *combo*. 
-> [!Note]
-> combo must match the name of an existing Combination listed in `_combinations`
 - `_add_unique_item(self, obj, item_dict, tag)`: Adds a key/value pair to the dictionary if and only if the key is not already present. Raises *KeyError* if a duplicate key is used.
 - `_tuple_list(self, obj_list)`: Utility function which iterates through a list of parser objects returning a a list of *object.tuple()*
 - `write_current_combo(self, combo_name, filename=None)`: Updates the *CurrentClonedCombo* tag and writes the entire tree to the file specified; if no file is specified then the one used to instantiate the *ManifestXml* object will be used. This method is not supported if the *ManifestXml* object refers to a *pin file*.
@@ -52,10 +53,10 @@ Per Pep8 methods and attributes beginning with `_` or `__` should be considered 
 - `get_submodule_alternates_for_remote(self, remote_name)`: Returns all *Submodule_Alternate_Remote* objects for the applicable *remote_name*. If no *Subdmodule_Alternate_Remotes* are present an empty list is returned.
 - `_dfs_traverse_etree(self, node)`: Traverses the element tree returning a dictionary representation that can be used to create XML or JSON formatted *Pin* file.
 - `generate_pin_etree(self, description, combo_name_repo_source_list)`: Returns an *etree* object representing a *Pin* file. Only the named combo is included.
-- `_compare_elements(self, element1, element2)`: Recursively compares *element1* and *element2* returning a boolean.
-- `__eq__(self, other)`: 
-- `__ne__(self, other)`: 
-- `get_combo_element(self, name)`: Finds the the combo element which matches *name* and returns a copy. Raises *ValueError* if no matching combo is found. 
+- `get_combo_element(self, name)`: Finds the the combo element which matches *name* and returns a copy. Raises *ValueError* if no matching combo is found.
+> [!NOTE]
+> - The `write_current_combo` and `write_source_manifest_repo` methods will strip comments from the source file
+> - When `combo` is a parameter it must match the name of an existing Combination listed in `_combinations`
 ### Properties
 - `get_all_patchsets(self)`: Returns a list of all patch sets.
 ### XML File Syntax
